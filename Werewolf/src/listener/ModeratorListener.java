@@ -18,4 +18,6 @@ public interface ModeratorListener {
     public void killed(String name);
     
     public void accussedResult(boolean b);
+    
+    public void winner();
 }

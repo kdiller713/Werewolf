@@ -12,7 +12,11 @@ public class VillagerText extends PlayerText {
 
     @Override
     public void awakAtNight() {
-        pl.giveResponse(this, null);
+        pl.giveResponse(this, "n null");
     }
 
+    @Override
+    public void winner(){
+        System.out.println("You have survived the werewolf");
+    }
 }

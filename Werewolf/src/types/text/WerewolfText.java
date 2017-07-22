@@ -24,4 +24,9 @@ public class WerewolfText extends PlayerText {
         pl.giveResponse(this, "n " + p);
     }
 
+    @Override
+    public void winner() {
+        System.out
+                .println("All the villagers were eaten and you starved to death");
+    }
 }
