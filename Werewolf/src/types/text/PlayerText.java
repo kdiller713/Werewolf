@@ -6,12 +6,12 @@ import java.util.Scanner;
 import listener.ModeratorListener;
 import listener.PlayerListener;
 
-public abstract class Player implements ModeratorListener {
+public abstract class PlayerText implements ModeratorListener {
     protected Scanner sc;
     protected ArrayList<String> players;
     protected PlayerListener pl;
 
-    public Player(PlayerListener p) {
+    public PlayerText(PlayerListener p) {
         sc = new Scanner(System.in);
         players = new ArrayList<String>();
         pl = p;
