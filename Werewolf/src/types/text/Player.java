@@ -31,6 +31,15 @@ public abstract class Player implements ModeratorListener {
     @Override
     public void accuse() {
         System.out.println("Would you like to accuse someone");
+
+        System.out.println("0. Nobody");
+
+        for (int i = 0; i < players.size(); i++) {
+            System.out.println((i + 1) + ". " + players.get(i));
+        }
+
+        String p = sc.nextLine();
+        pl.giveResponse(this, p);
     }
 
     @Override
