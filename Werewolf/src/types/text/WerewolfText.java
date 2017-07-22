@@ -2,11 +2,11 @@ package types.text;
 
 import listener.PlayerListener;
 
-public class WerewolfText extends PlayerText{
+public class WerewolfText extends PlayerText {
 
-    public WerewolfText(PlayerListener p) {
-        super(p);
-        
+    public WerewolfText(PlayerListener p, int n, int ind) {
+        super(p, n, ind);
+
         System.out.println("You are the werewolf");
     }
 
@@ -21,7 +21,7 @@ public class WerewolfText extends PlayerText{
         }
 
         String p = sc.nextLine();
-        pl.giveResponse(this, p);
+        pl.giveResponse(this, "n " + p);
     }
 
 }

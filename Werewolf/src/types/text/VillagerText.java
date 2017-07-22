@@ -4,8 +4,8 @@ import listener.PlayerListener;
 
 public class VillagerText extends PlayerText {
 
-    public VillagerText(PlayerListener p) {
-        super(p);
+    public VillagerText(PlayerListener p, int n, int ind) {
+        super(p, n, ind);
 
         System.out.println("You are a villager");
     }

@@ -11,7 +11,15 @@ public abstract class PlayerText implements ModeratorListener {
     protected ArrayList<String> players;
     protected PlayerListener pl;
 
-    public PlayerText(PlayerListener p) {
+    public PlayerText(PlayerListener p, int n, int ind) {
+        System.out.println("Welcome to the village");
+        System.out.println("You are Player " + ind);
+        System.out.println("You are 1 of " + n + " players");
+
+        for (int i = 1; i <= n; i++) {
+            players.add("Player " + i);
+        }
+        
         sc = new Scanner(System.in);
         players = new ArrayList<String>();
         pl = p;
@@ -39,7 +47,7 @@ public abstract class PlayerText implements ModeratorListener {
         }
 
         String p = sc.nextLine();
-        pl.giveResponse(this, p);
+        pl.giveResponse(this, "a " + p);
     }
 
     @Override
@@ -60,7 +68,7 @@ public abstract class PlayerText implements ModeratorListener {
         System.out.println("0. Spare");
         System.out.println("1. Execute");
         String vote = sc.nextLine();
-        pl.giveResponse(this, vote);
+        pl.giveResponse(this, "v " + vote);
 
         System.out.println("You have voted, wait for others to vote");
     }
@@ -69,7 +77,7 @@ public abstract class PlayerText implements ModeratorListener {
     public void defend() {
         System.out.println("You have been accused, what is your defence");
         String def = sc.nextLine();
-        pl.giveResponse(this, def);
+        pl.giveResponse(this, "d " + def);
         System.out.println("You make your defence, it's up to a vote");
     }
 
@@ -82,16 +90,6 @@ public abstract class PlayerText implements ModeratorListener {
     public void killed(String name) {
         System.out.println(name + " has been killed");
         players.remove(name);
-    }
-
-    @Override
-    public void numPlayers(int n, int ind) {
-        System.out.println("You are Player " + ind);
-        System.out.println("You are 1 of " + n + " players");
-
-        for (int i = 1; i <= n; i++) {
-            players.add("Player " + i);
-        }
     }
 
 }
