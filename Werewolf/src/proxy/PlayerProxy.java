@@ -16,9 +16,10 @@ public class PlayerProxy implements ModeratorListener, Runnable {
 
     public PlayerProxy(Socket s, PlayerListener l, int n, int ind, char role) {
         sock = s;
-        name = "Player " + (ind + 1);
+        name = "Player " + ind;
         pl = l;
         try {
+            out = new PrintWriter(sock.getOutputStream());
             sc = new Scanner(sock.getInputStream());
             out.println(role + " " + n + " " + ind);
         } catch (Exception e) {
