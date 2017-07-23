@@ -13,9 +13,8 @@ public class ServerProxy implements PlayerListener, Runnable {
     private PrintWriter out;
     private Scanner sc;
 
-    public ServerProxy(Socket s, Scanner scan, ModeratorListener p) {
+    public ServerProxy(Socket s, Scanner scan) {
         sock = s;
-        ml = p;
         sc = scan;
         try {
             out = new PrintWriter(sock.getOutputStream());
@@ -24,6 +23,10 @@ public class ServerProxy implements PlayerListener, Runnable {
 
         Thread t = new Thread(this);
         t.start();
+    }
+    
+    public void setModeratorListener(ModeratorListener m){
+        ml = m;
     }
 
     @Override
