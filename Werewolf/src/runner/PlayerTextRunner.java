@@ -26,7 +26,21 @@ public class PlayerTextRunner {
                 .println("You have been connected, waiting for other players");
 
         Scanner scan = new Scanner(sock.getInputStream());
-        String line = sc.nextLine();
+
+        if (!scan.hasNextLine()) {
+            System.out.println("Server closed");
+            sc.close();
+            scan.close();
+            sock.close();
+            return;
+        }
+
+        System.out.println("Got your role");
+
+        String line = scan.nextLine();
+
+        System.out.println("Game about to begin");
+
         String[] split = line.split(" ");
 
         int n = Integer.parseInt(split[1]);

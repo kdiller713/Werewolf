@@ -40,7 +40,7 @@ public class ServerTextRunner {
         });
         t.start();
 
-        System.out.println("Hit Enter When All Players Are Joined");
+        System.out.println("Hit Enter When All Players Have Joined");
         while (!sc.hasNextLine())
             ;
         sc.nextLine();
@@ -53,7 +53,6 @@ public class ServerTextRunner {
 
         conn.remove(conn.size() - 1);
         s.close();
-        ss.close();
 
         ArrayList<Character> roles = new ArrayList<Character>();
         int wolf = (int) (Math.random() * conn.size());
@@ -74,5 +73,6 @@ public class ServerTextRunner {
 
         st.begin(players, roles);
         sc.close();
+        ss.close();
     }
 }
