@@ -75,6 +75,25 @@ public class ServerText implements PlayerListener {
             while (inputs[i] == null)
                 ;
         }
+
+        ArrayList<ModeratorListener> killed = new ArrayList<ModeratorListener>();
+
+        for (int i = 0; i < players.size(); i++) {
+            if (roles.get(i) == 'w') {
+                int k = Integer.parseInt(inputs[i]);
+                killed.add(players.get(k));
+            }
+        }
+
+        for (int i = 0; i < players.size(); i++) {
+            for (int j = 0; j < killed.size(); j++) {
+                players.get(i).killed(killed.get(j).getName());
+            }
+        }
+
+        for (int i = 0; i < killed.size(); i++) {
+            killed.get(i).eliminated();
+        }
     }
 
     private void accuse() {

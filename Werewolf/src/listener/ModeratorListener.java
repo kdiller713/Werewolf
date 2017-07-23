@@ -20,4 +20,6 @@ public interface ModeratorListener {
     public void accussedResult(boolean b);
     
     public void winner();
+    
+    public String getName();
 }

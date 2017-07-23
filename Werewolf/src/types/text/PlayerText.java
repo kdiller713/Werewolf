@@ -10,19 +10,26 @@ public abstract class PlayerText implements ModeratorListener {
     protected Scanner sc;
     protected ArrayList<String> players;
     protected PlayerListener pl;
+    private String name;
 
     public PlayerText(PlayerListener p, int n, int ind) {
         System.out.println("Welcome to the village");
         System.out.println("You are Player " + ind);
         System.out.println("You are 1 of " + n + " players");
+        name = "Player " + ind;
 
         for (int i = 1; i <= n; i++) {
             players.add("Player " + i);
         }
-        
+
         sc = new Scanner(System.in);
         players = new ArrayList<String>();
         pl = p;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
