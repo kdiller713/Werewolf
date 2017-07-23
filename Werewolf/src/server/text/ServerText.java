@@ -9,16 +9,19 @@ public class ServerText implements PlayerListener {
     private ArrayList<ModeratorListener> players;
     private ArrayList<Character> roles;
     private String[] inputs;
+    private int[] max;
+    private int maxInd;
     private State game;
 
     private enum State {
-        NIGHT, ACCUSE, VOTE
+        NIGHT, ACCUSE, VOTE, DEFEND
     }
 
-    public ServerText(ArrayList<ModeratorListener> p, ArrayList<Character> r) {
+    public void begin(ArrayList<ModeratorListener> p, ArrayList<Character> r) {
         players = p;
         roles = r;
         inputs = new String[players.size()];
+        max = new int[players.size()];
 
         System.out.println("Someone has been turned into a werewolf");
         System.out.println(roles);
@@ -66,9 +69,9 @@ public class ServerText implements PlayerListener {
         game = State.NIGHT;
 
         for (int i = 0; i < players.size(); i++) {
+            inputs[i] = null;
             players.get(i).startNight();
             players.get(i).awakAtNight();
-            inputs[i] = null;
         }
 
         for (int i = 0; i < players.size(); i++) {
@@ -81,23 +84,117 @@ public class ServerText implements PlayerListener {
         for (int i = 0; i < players.size(); i++) {
             if (roles.get(i) == 'w') {
                 int k = Integer.parseInt(inputs[i]);
-                killed.add(players.get(k));
+                if (k > 0)
+                    killed.add(players.get(k - 1));
             }
         }
 
         for (int i = 0; i < players.size(); i++) {
+            if(killed.size() > 0){
             for (int j = 0; j < killed.size(); j++) {
                 players.get(i).killed(killed.get(j).getName());
+            }}else{
+                players.get(i).noEat();
             }
         }
 
         for (int i = 0; i < killed.size(); i++) {
             killed.get(i).eliminated();
+            int ind = players.indexOf(killed.get(i));
+            players.remove(ind);
+            roles.remove(ind);
         }
     }
 
     private void accuse() {
+        System.out.println("Accusations take place");
 
+        game = State.ACCUSE;
+
+        for (int i = 0; i < players.size(); i++) {
+            inputs[i] = null;
+            max[i] = 0;
+            players.get(i).accuse();
+        }
+
+        for (int i = 0; i < players.size(); i++) {
+            while (inputs[i] == null)
+                ;
+
+            try {
+                int ind = Integer.parseInt(inputs[i]);
+                if (ind > 0)
+                    max[ind - 1]++;
+            } catch (Exception e) {
+
+            }
+        }
+
+        int maxAcc = max[0];
+        maxInd = 0;
+
+        for (int i = 1; i < players.size(); i++) {
+            if (maxAcc < max[i]) {
+                maxInd = i;
+                maxAcc = max[i];
+            }
+        }
+
+        if (maxAcc == 0) {
+            for (int i = 0; i < players.size(); i++) {
+                players.get(i).noAccuse();
+            }
+
+            return;
+        }
+
+        game = State.DEFEND;
+
+        for (int i = 0; i < players.size(); i++) {
+            inputs[i] = null;
+            players.get(i).defenseBeingMade(players.get(maxInd).getName());
+        }
+
+        inputs[maxInd] = null;
+        players.get(maxInd).defend();
+
+        while (inputs[maxInd] == null)
+            ;
+
+        game = State.VOTE;
+        String def = inputs[maxInd];
+        int votes = 0;
+
+        for (int i = 0; i < players.size(); i++) {
+            inputs[i] = null;
+            players.get(i).vote(def);
+        }
+
+        for (int i = 0; i < players.size(); i++) {
+            while (inputs[i] == null)
+                ;
+
+            try {
+                int ind = Integer.parseInt(inputs[i]);
+                votes += ind;
+            } catch (Exception e) {
+
+            }
+        }
+
+        boolean good = votes > players.size() / 2;
+
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).accussedResult(good);
+            if (good)
+                players.get(i).killed(players.get(maxInd).getName());
+        }
+
+        if (good) {
+            players.get(maxInd).eliminated();
+            players.remove(maxInd);
+            roles.remove(maxInd);
+        }
     }
 
     @Override
@@ -115,6 +212,12 @@ public class ServerText implements PlayerListener {
             if (resp.charAt(0) != 'v')
                 return;
             break;
+        case DEFEND:
+            if (resp.charAt(0) != 'd')
+                return;
+
+            if (ml != players.get(maxInd))
+                return;
         }
 
         for (int i = 0; i < players.size(); i++) {

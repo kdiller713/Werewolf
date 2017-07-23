@@ -14,6 +14,8 @@ public interface ModeratorListener {
     public void defend();
 
     public void defenseBeingMade(String name);
+    
+    public void noAccuse();
 
     public void killed(String name);
     
@@ -22,4 +24,6 @@ public interface ModeratorListener {
     public void winner();
     
     public String getName();
+    
+    public void noEat();
 }

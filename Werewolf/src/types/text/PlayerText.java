@@ -18,12 +18,13 @@ public abstract class PlayerText implements ModeratorListener {
         System.out.println("You are 1 of " + n + " players");
         name = "Player " + ind;
 
+        players = new ArrayList<String>();
+
         for (int i = 1; i <= n; i++) {
             players.add("Player " + i);
         }
 
         sc = new Scanner(System.in);
-        players = new ArrayList<String>();
         pl = p;
     }
 
@@ -99,4 +100,13 @@ public abstract class PlayerText implements ModeratorListener {
         players.remove(name);
     }
 
+    @Override
+    public void noAccuse() {
+        System.out.println("No one has been accused");
+    }
+
+    @Override
+    public void noEat() {
+        System.out.println("No one was eaten");
+    }
 }
