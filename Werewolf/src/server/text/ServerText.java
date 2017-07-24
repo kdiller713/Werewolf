@@ -24,7 +24,6 @@ public class ServerText implements PlayerListener {
         max = new int[players.size()];
 
         System.out.println("Someone has been turned into a werewolf");
-        System.out.println(roles);
 
         while (true) {
             night();
