@@ -79,7 +79,7 @@ public class ServerText implements PlayerListener {
         for (int i = 0; i < players.size(); i++) {
             while (inputs[i] == null) {
                 try {
-                    Thread.sleep(100);
+                    wait();
                 } catch (InterruptedException e) {
                 }
             }
@@ -129,7 +129,7 @@ public class ServerText implements PlayerListener {
         for (int i = 0; i < players.size(); i++) {
             while (inputs[i] == null) {
                 try {
-                    Thread.sleep(100);
+                    wait();
                 } catch (InterruptedException e) {
                 }
             }
@@ -173,7 +173,7 @@ public class ServerText implements PlayerListener {
 
         while (inputs[maxInd] == null) {
             try {
-                Thread.sleep(100);
+                wait();
             } catch (InterruptedException e) {
             }
         }
@@ -190,7 +190,7 @@ public class ServerText implements PlayerListener {
         for (int i = 0; i < players.size(); i++) {
             while (inputs[i] == null) {
                 try {
-                    Thread.sleep(100);
+                    wait();
                 } catch (InterruptedException e) {
                 }
             }
@@ -245,6 +245,8 @@ public class ServerText implements PlayerListener {
             if (ml == players.get(i))
                 inputs[i] = resp.substring(2);
         }
+
+        notifyAll();
     }
 
 }
