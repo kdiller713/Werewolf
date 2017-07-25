@@ -24,8 +24,8 @@ public class ServerProxy implements PlayerListener, Runnable {
         Thread t = new Thread(this);
         t.start();
     }
-    
-    public void setModeratorListener(ModeratorListener m){
+
+    public void setModeratorListener(ModeratorListener m) {
         ml = m;
     }
 
@@ -39,9 +39,10 @@ public class ServerProxy implements PlayerListener, Runnable {
     public void run() {
         try {
             String line;
-            
-            while(ml == null);
-            
+
+            while (ml == null)
+                ;
+
             while (sc.hasNextLine()) {
                 line = sc.nextLine();
                 String[] choices = line.split(" ");

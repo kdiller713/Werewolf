@@ -12,7 +12,7 @@ public class VillagerText extends PlayerText {
 
     @Override
     public void awakAtNight() {
-        pl.giveResponse(this, "n null");
+        pl.giveResponse(this, "n 0");
     }
 
     @Override

@@ -112,10 +112,12 @@ public class PlayerProxy implements ModeratorListener, Runnable {
     @Override
     public void run() {
         try {
-            while (sc.hasNextLine())
-                pl.giveResponse(this, sc.nextLine());
+            while (sc.hasNextLine()){
+                String s = sc.nextLine();
+                pl.giveResponse(this, s);
+            }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }

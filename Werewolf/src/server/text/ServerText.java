@@ -23,6 +23,7 @@ public class ServerText implements PlayerListener {
         inputs = new String[players.size()];
         max = new int[players.size()];
 
+        System.out.println(p.size() + " players");
         System.out.println("Someone has been turned into a werewolf");
 
         while (true) {
@@ -73,10 +74,18 @@ public class ServerText implements PlayerListener {
             players.get(i).awakAtNight();
         }
 
+        System.out.println("Waiting for player choices");
+
         for (int i = 0; i < players.size(); i++) {
-            while (inputs[i] == null)
-                ;
+            while (inputs[i] == null) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                }
+            }
         }
+
+        System.out.println("Got player choices");
 
         ArrayList<ModeratorListener> killed = new ArrayList<ModeratorListener>();
 
@@ -89,10 +98,11 @@ public class ServerText implements PlayerListener {
         }
 
         for (int i = 0; i < players.size(); i++) {
-            if(killed.size() > 0){
-            for (int j = 0; j < killed.size(); j++) {
-                players.get(i).killed(killed.get(j).getName());
-            }}else{
+            if (killed.size() > 0) {
+                for (int j = 0; j < killed.size(); j++) {
+                    players.get(i).killed(killed.get(j).getName());
+                }
+            } else {
                 players.get(i).noEat();
             }
         }
@@ -117,8 +127,12 @@ public class ServerText implements PlayerListener {
         }
 
         for (int i = 0; i < players.size(); i++) {
-            while (inputs[i] == null)
-                ;
+            while (inputs[i] == null) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                }
+            }
 
             try {
                 int ind = Integer.parseInt(inputs[i]);
@@ -157,8 +171,12 @@ public class ServerText implements PlayerListener {
         inputs[maxInd] = null;
         players.get(maxInd).defend();
 
-        while (inputs[maxInd] == null)
-            ;
+        while (inputs[maxInd] == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
+        }
 
         game = State.VOTE;
         String def = inputs[maxInd];
@@ -170,8 +188,12 @@ public class ServerText implements PlayerListener {
         }
 
         for (int i = 0; i < players.size(); i++) {
-            while (inputs[i] == null)
-                ;
+            while (inputs[i] == null) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                }
+            }
 
             try {
                 int ind = Integer.parseInt(inputs[i]);
@@ -197,7 +219,7 @@ public class ServerText implements PlayerListener {
     }
 
     @Override
-    public void giveResponse(ModeratorListener ml, String resp) {
+    public synchronized void giveResponse(ModeratorListener ml, String resp) {
         switch (game) {
         case NIGHT:
             if (resp.charAt(0) != 'n')

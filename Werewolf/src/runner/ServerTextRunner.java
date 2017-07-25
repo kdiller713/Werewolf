@@ -74,5 +74,9 @@ public class ServerTextRunner {
         st.begin(players, roles);
         sc.close();
         ss.close();
+
+        for (int i = 0; i < conn.size(); i++) {
+            conn.get(i).close();
+        }
     }
 }
