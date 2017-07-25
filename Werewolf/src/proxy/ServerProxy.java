@@ -25,7 +25,8 @@ public class ServerProxy implements PlayerListener, Runnable {
         t.start();
     }
 
-    public void setModeratorListener(ModeratorListener m) {
+    @Override
+    public void addModeratorListener(ModeratorListener m) {
         ml = m;
     }
 

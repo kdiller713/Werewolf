@@ -12,7 +12,7 @@ public abstract class PlayerText implements ModeratorListener {
     protected PlayerListener pl;
     private String name;
 
-    public PlayerText(PlayerListener p, int n, int ind) {
+    public PlayerText(int n, int ind) {
         System.out.println("Welcome to the village");
         System.out.println("You are Player " + ind);
         System.out.println("You are 1 of " + n + " players");
@@ -25,6 +25,10 @@ public abstract class PlayerText implements ModeratorListener {
         }
 
         sc = new Scanner(System.in);
+    }
+    
+    @Override
+    public void setPlayerListener(PlayerListener p){
         pl = p;
     }
 

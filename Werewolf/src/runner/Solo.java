@@ -21,12 +21,15 @@ public class Solo {
 
         for (int i = 0; i < roles.size(); i++) {
             if (roles.get(i) == 'v') {
-                players.add(new VillagerText(st, roles.size(), i + 1));
+                players.add(new VillagerText(roles.size(), i + 1));
             } else {
-                players.add(new WerewolfText(st, roles.size(), i + 1));
+                players.add(new WerewolfText(roles.size(), i + 1));
             }
+            
+            players.get(i).setPlayerListener(st);
+            st.addModeratorListener(players.get(i));
         }
 
-        st.begin(players, roles);
+        st.begin(roles);
     }
 }

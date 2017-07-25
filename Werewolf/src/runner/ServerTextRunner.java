@@ -67,11 +67,13 @@ public class ServerTextRunner {
                 roles.add('v');
             }
 
-            players.add(new PlayerProxy(conn.get(i), st, conn.size(), i + 1,
+            players.add(new PlayerProxy(conn.get(i), conn.size(), i + 1,
                     roles.get(i)));
+            players.get(i).setPlayerListener(st);
+            st.addModeratorListener(players.get(i));
         }
 
-        st.begin(players, roles);
+        st.begin(roles);
         sc.close();
         ss.close();
 

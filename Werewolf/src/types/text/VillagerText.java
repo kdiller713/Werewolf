@@ -1,11 +1,9 @@
 package types.text;
 
-import listener.PlayerListener;
-
 public class VillagerText extends PlayerText {
 
-    public VillagerText(PlayerListener p, int n, int ind) {
-        super(p, n, ind);
+    public VillagerText(int n, int ind) {
+        super(n, ind);
 
         System.out.println("You are a villager");
     }
@@ -16,7 +14,7 @@ public class VillagerText extends PlayerText {
     }
 
     @Override
-    public void winner(){
+    public void winner() {
         System.out.println("You have survived the werewolf");
     }
 }

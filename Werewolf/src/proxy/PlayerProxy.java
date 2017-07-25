@@ -14,10 +14,9 @@ public class PlayerProxy implements ModeratorListener, Runnable {
     private Scanner sc;
     private String name;
 
-    public PlayerProxy(Socket s, PlayerListener l, int n, int ind, char role) {
+    public PlayerProxy(Socket s, int n, int ind, char role) {
         sock = s;
         name = "Player " + ind;
-        pl = l;
         try {
             out = new PrintWriter(sock.getOutputStream());
             sc = new Scanner(sock.getInputStream());
@@ -30,6 +29,11 @@ public class PlayerProxy implements ModeratorListener, Runnable {
 
         Thread t = new Thread(this);
         t.start();
+    }
+    
+    @Override
+    public void setPlayerListener(PlayerListener p){
+        pl = p;
     }
 
     @Override

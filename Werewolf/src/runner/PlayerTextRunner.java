@@ -50,13 +50,15 @@ public class PlayerTextRunner {
 
         switch (split[0]) {
         case "w":
-            ml = new WerewolfText(sp, n, ind);
+            ml = new WerewolfText(n, ind);
             break;
         case "v":
-            ml = new VillagerText(sp, n, ind);
+            ml = new VillagerText(n, ind);
             break;
         }
+        
+        ml.setPlayerListener(sp);
 
-        sp.setModeratorListener(ml);
+        sp.addModeratorListener(ml);
     }
 }

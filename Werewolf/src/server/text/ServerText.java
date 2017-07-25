@@ -16,14 +16,21 @@ public class ServerText implements PlayerListener {
     private enum State {
         NIGHT, ACCUSE, VOTE, DEFEND
     }
+    
+    public ServerText(){
+        players = new ArrayList<ModeratorListener>();
+    }
+    
+    public void addModeratorListener(ModeratorListener ml){
+        players.add(ml);
+    }
 
-    public void begin(ArrayList<ModeratorListener> p, ArrayList<Character> r) {
-        players = p;
+    public void begin(ArrayList<Character> r) {
         roles = r;
         inputs = new String[players.size()];
         max = new int[players.size()];
 
-        System.out.println(p.size() + " players");
+        System.out.println(players.size() + " players");
         System.out.println("Someone has been turned into a werewolf");
 
         while (true) {

@@ -1,6 +1,8 @@
 package listener;
 
 public interface ModeratorListener {
+    public void setPlayerListener(PlayerListener p);
+    
     public void startNight();
 
     public void awakAtNight();
