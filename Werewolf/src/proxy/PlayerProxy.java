@@ -22,6 +22,7 @@ public class PlayerProxy implements ModeratorListener, Runnable {
             out = new PrintWriter(sock.getOutputStream());
             sc = new Scanner(sock.getInputStream());
             out.println(role + " " + n + " " + ind);
+            out.flush();
             System.out.println(name + " " + role);
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,56 +35,67 @@ public class PlayerProxy implements ModeratorListener, Runnable {
     @Override
     public void startNight() {
         out.println("start");
+        out.flush();
     }
 
     @Override
     public void awakAtNight() {
         out.println("awake");
+        out.flush();
     }
 
     @Override
     public void eliminated() {
         out.println("elim");
+        out.flush();
     }
 
     @Override
     public void accuse() {
         out.println("accuse");
+        out.flush();
     }
 
     @Override
     public void vote(String defense) {
         out.println("vote " + defense);
+        out.flush();
     }
 
     @Override
     public void defend() {
         out.println("defend");
+        out.flush();
     }
 
     @Override
     public void defenseBeingMade(String name) {
         out.println("defense " + name);
+        out.flush();
     }
 
     @Override
     public void noAccuse() {
         out.println("no");
+        out.flush();
     }
 
     @Override
     public void killed(String name) {
         out.println("killed " + name);
+        out.flush();
     }
 
     @Override
     public void accussedResult(boolean b) {
         out.println("result " + b);
+        out.flush();
     }
 
     @Override
     public void winner() {
         out.println("winner");
+        out.flush();
     }
 
     @Override
@@ -94,6 +106,7 @@ public class PlayerProxy implements ModeratorListener, Runnable {
     @Override
     public void noEat() {
         out.println("eat");
+        out.flush();
     }
 
     @Override

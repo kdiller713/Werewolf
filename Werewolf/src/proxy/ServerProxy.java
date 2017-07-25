@@ -32,12 +32,16 @@ public class ServerProxy implements PlayerListener, Runnable {
     @Override
     public void giveResponse(ModeratorListener ml, String resp) {
         out.println(resp);
+        out.flush();
     }
 
     @Override
     public void run() {
         try {
             String line;
+            
+            while(ml == null);
+            
             while (sc.hasNextLine()) {
                 line = sc.nextLine();
                 String[] choices = line.split(" ");
@@ -83,7 +87,6 @@ public class ServerProxy implements PlayerListener, Runnable {
                 }
             }
         } catch (Exception e) {
-
         }
     }
 }
