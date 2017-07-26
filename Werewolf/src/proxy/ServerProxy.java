@@ -47,6 +47,7 @@ public class ServerProxy implements PlayerListener, Runnable {
             while (sc.hasNextLine()) {
                 line = sc.nextLine();
                 String[] choices = line.split(" ");
+                System.out.println(line);
 
                 switch (choices[0]) {
                 case "start":

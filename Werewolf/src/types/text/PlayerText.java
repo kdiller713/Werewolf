@@ -3,6 +3,10 @@ package types.text;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+
 import listener.ModeratorListener;
 import listener.PlayerListener;
 
@@ -26,9 +30,9 @@ public abstract class PlayerText implements ModeratorListener {
 
         sc = new Scanner(System.in);
     }
-    
+
     @Override
-    public void setPlayerListener(PlayerListener p){
+    public void setPlayerListener(PlayerListener p) {
         pl = p;
     }
 
@@ -50,15 +54,7 @@ public abstract class PlayerText implements ModeratorListener {
 
     @Override
     public void accuse() {
-        System.out.println("Would you like to accuse someone");
-
-        System.out.println("0. Nobody");
-
-        for (int i = 0; i < players.size(); i++) {
-            System.out.println((i + 1) + ". " + players.get(i));
-        }
-
-        String p = sc.nextLine();
+        String p = playerChoose("Would you like to accuse someone");
         pl.giveResponse(this, "a " + p);
     }
 
@@ -74,21 +70,20 @@ public abstract class PlayerText implements ModeratorListener {
 
     @Override
     public void vote(String defense) {
-        System.out.println("The player denfends themselves with");
-        System.out.println("\"" + defense + "\"");
-        System.out.println("Execute them or spare");
-        System.out.println("0. Spare");
-        System.out.println("1. Execute");
-        String vote = sc.nextLine();
-        pl.giveResponse(this, "v " + vote);
+        int choice = JOptionPane.showConfirmDialog(null,
+                "The Player defendes themselves with\n\"" + defense
+                        + "\"\nDo you want to kill them", "Execute",
+                JOptionPane.YES_NO_OPTION);
+        pl.giveResponse(this, "v " + (choice == JOptionPane.YES_OPTION ? 1 : 0));
 
         System.out.println("You have voted, wait for others to vote");
     }
 
     @Override
     public void defend() {
-        System.out.println("You have been accused, what is your defence");
-        String def = sc.nextLine();
+        String def = JOptionPane.showInputDialog(null,
+                "You have been accused\nWhat is your defence", "Accused",
+                JOptionPane.OK_CANCEL_OPTION);
         pl.giveResponse(this, "d " + def);
         System.out.println("You make your defence, it's up to a vote");
     }
@@ -112,5 +107,26 @@ public abstract class PlayerText implements ModeratorListener {
     @Override
     public void noEat() {
         System.out.println("No one was eaten");
+    }
+
+    protected String playerChoose(String msg) {
+        String[] pl = new String[players.size() + 1];
+
+        pl[0] = "No one";
+
+        for (int i = 0; i < players.size(); i++) {
+            pl[i + 1] = players.get(i);
+        }
+
+        JList<String> list = new JList<String>(pl);
+        list.setSelectedIndex(0);
+
+        Object[] disp = { msg, new JScrollPane(list) };
+        System.out.println("Select a player");
+
+        JOptionPane.showConfirmDialog(null, disp, "Pick a Player",
+                JOptionPane.OK_CANCEL_OPTION);
+
+        return list.getSelectedIndex() + "";
     }
 }

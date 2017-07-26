@@ -10,16 +10,9 @@ public class WerewolfText extends PlayerText {
 
     @Override
     public void awakAtNight() {
-        System.out.println("Would you like to eat someone");
-
-        System.out.println("0. Nobody");
-
-        for (int i = 0; i < players.size(); i++) {
-            System.out.println((i + 1) + ". " + players.get(i));
-        }
-
-        String p = sc.nextLine();
+        String p = playerChoose("Would you like to kill someone");
         pl.giveResponse(this, "n " + p);
+        System.out.println(p);
     }
 
     @Override
