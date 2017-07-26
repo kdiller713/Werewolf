@@ -26,14 +26,14 @@ public class PlayerProxy implements ModeratorListener, Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Thread t = new Thread(this);
-        t.start();
     }
     
     @Override
     public void setPlayerListener(PlayerListener p){
         pl = p;
+
+        Thread t = new Thread(this);
+        t.start();
     }
 
     @Override

@@ -20,14 +20,14 @@ public class ServerProxy implements PlayerListener, Runnable {
             out = new PrintWriter(sock.getOutputStream());
         } catch (Exception e) {
         }
-
-        Thread t = new Thread(this);
-        t.start();
     }
 
     @Override
     public void addModeratorListener(ModeratorListener m) {
         ml = m;
+
+        Thread t = new Thread(this);
+        t.start();
     }
 
     @Override
@@ -37,12 +37,9 @@ public class ServerProxy implements PlayerListener, Runnable {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         try {
             String line;
-
-            while (ml == null)
-                ;
 
             while (sc.hasNextLine()) {
                 line = sc.nextLine();
