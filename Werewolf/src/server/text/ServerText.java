@@ -21,11 +21,11 @@ public class ServerText implements PlayerListener {
         players = new ArrayList<ModeratorListener>();
     }
     
-    public void addModeratorListener(ModeratorListener ml){
+    public synchronized void addModeratorListener(ModeratorListener ml){
         players.add(ml);
     }
 
-    public void begin(ArrayList<Character> r) {
+    public synchronized void begin(ArrayList<Character> r) {
         roles = r;
         inputs = new String[players.size()];
         max = new int[players.size()];
@@ -50,7 +50,7 @@ public class ServerText implements PlayerListener {
         System.out.println("The game has ended");
     }
 
-    private boolean winner() {
+    private synchronized boolean winner() {
         int werewolfCount = 0;
         int villagerCount = 0;
 
@@ -70,7 +70,7 @@ public class ServerText implements PlayerListener {
         return werewolfCount == 0 || villagerCount == 0;
     }
 
-    private void night() {
+    private synchronized void night() {
         System.out.println("Night has fallen");
 
         game = State.NIGHT;
@@ -122,7 +122,7 @@ public class ServerText implements PlayerListener {
         }
     }
 
-    private void accuse() {
+    private synchronized void accuse() {
         System.out.println("Accusations take place");
 
         game = State.ACCUSE;
