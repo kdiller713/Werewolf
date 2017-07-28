@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import listener.ModeratorListener;
 import proxy.ServerProxy;
+import types.text.PacifistText;
+import types.text.VillageIdiotText;
 import types.text.VillagerText;
 import types.text.WerewolfText;
 
@@ -55,8 +57,14 @@ public class PlayerTextRunner {
         case "v":
             ml = new VillagerText(n, ind);
             break;
+        case "i":
+            ml = new VillageIdiotText(n, ind);
+            break;
+        case "p":
+            ml = new PacifistText(n, ind);
+            break;
         }
-        
+
         ml.setPlayerListener(sp);
 
         sp.addModeratorListener(ml);

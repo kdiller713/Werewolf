@@ -16,12 +16,12 @@ public class ServerText implements PlayerListener {
     private enum State {
         NIGHT, ACCUSE, VOTE, DEFEND
     }
-    
-    public ServerText(){
+
+    public ServerText() {
         players = new ArrayList<ModeratorListener>();
     }
-    
-    public synchronized void addModeratorListener(ModeratorListener ml){
+
+    public synchronized void addModeratorListener(ModeratorListener ml) {
         players.add(ml);
     }
 
@@ -55,10 +55,16 @@ public class ServerText implements PlayerListener {
         int villagerCount = 0;
 
         for (int i = 0; i < roles.size(); i++) {
-            if (roles.get(i) == 'w')
+            switch (roles.get(i)) {
+            case 'w':
                 werewolfCount++;
-            else if (roles.get(i) == 'v')
+                break;
+            case 'v':
+            case 'i':
+            case 'p':
+            case 's':
                 villagerCount++;
+            }
         }
 
         if (villagerCount == 0 || werewolfCount == 0) {
