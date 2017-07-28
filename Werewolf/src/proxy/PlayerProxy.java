@@ -114,6 +114,12 @@ public class PlayerProxy implements ModeratorListener, Runnable {
     }
 
     @Override
+    public void isTarget(boolean b) {
+        out.println("target " + b);
+        out.flush();
+    }
+
+    @Override
     public void run() {
         try {
             while (sc.hasNextLine()){

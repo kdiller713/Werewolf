@@ -28,4 +28,6 @@ public interface ModeratorListener {
     public String getName();
     
     public void noEat();
+    
+    public void isTarget(boolean b);
 }

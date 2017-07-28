@@ -131,4 +131,9 @@ public abstract class PlayerText implements ModeratorListener {
 
         return list.getSelectedIndex() + "";
     }
+    
+    @Override
+    public void isTarget(boolean b){
+        
+    }
 }

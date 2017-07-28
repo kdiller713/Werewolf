@@ -84,6 +84,9 @@ public class ServerProxy implements PlayerListener, Runnable {
                 case "eat":
                     ml.noEat();
                     break;
+                case "target":
+                    ml.isTarget(Boolean.parseBoolean(choices[1]));
+                    break;
                 }
             }
         } catch (Exception e) {
