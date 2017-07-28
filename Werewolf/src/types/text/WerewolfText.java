@@ -20,7 +20,7 @@ public class WerewolfText extends PlayerText {
         if(p.equals("0")){
             System.out.println("You ate nobody");
         }else{
-        System.out.println("You ate " + players.get(Integer.parseInt(p) - 0));
+            System.out.println("You ate " + players.get(Integer.parseInt(p) - 1));
         }
     }
 

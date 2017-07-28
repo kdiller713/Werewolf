@@ -96,6 +96,8 @@ public class ServerText implements PlayerListener {
                 } catch (InterruptedException e) {
                 }
             }
+            
+            System.out.println(players.get(i).getName() + " has given choice");
         }
 
         System.out.println("Got player choices");
@@ -152,6 +154,8 @@ public class ServerText implements PlayerListener {
                 } catch (InterruptedException e) {
                 }
             }
+            
+            System.out.println(players.get(i).getName() + " has given choice");
 
             try {
                 int ind = Integer.parseInt(inputs[i]);
@@ -200,6 +204,8 @@ public class ServerText implements PlayerListener {
         game = State.VOTE;
         String def = inputs[maxInd];
         int votes = 0;
+        
+        System.out.println("Voting to begin");
 
         for (int i = 0; i < players.size(); i++) {
             inputs[i] = null;
@@ -213,6 +219,9 @@ public class ServerText implements PlayerListener {
                 } catch (InterruptedException e) {
                 }
             }
+
+            
+            System.out.println(players.get(i).getName() + " has given choice");
 
             try {
                 int ind = Integer.parseInt(inputs[i]);

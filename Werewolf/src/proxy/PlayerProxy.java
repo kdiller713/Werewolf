@@ -1,5 +1,7 @@
 package proxy;
 
+import java.io.File;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
@@ -27,9 +29,9 @@ public class PlayerProxy implements ModeratorListener, Runnable {
             e.printStackTrace();
         }
     }
-    
+
     @Override
-    public void setPlayerListener(PlayerListener p){
+    public void setPlayerListener(PlayerListener p) {
         pl = p;
 
         Thread t = new Thread(this);
@@ -121,13 +123,19 @@ public class PlayerProxy implements ModeratorListener, Runnable {
 
     @Override
     public void run() {
+        PrintStream log = null;
         try {
-            while (sc.hasNextLine()){
+            log = new PrintStream(new File("Server.log"));
+
+            while (sc.hasNextLine()) {
                 String s = sc.nextLine();
                 pl.giveResponse(this, s);
+                log.println(s);
+                log.flush();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(log);
+            log.flush();
         }
     }
 }

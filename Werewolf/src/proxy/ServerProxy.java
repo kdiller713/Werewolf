@@ -1,5 +1,7 @@
 package proxy;
 
+import java.io.File;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
@@ -38,13 +40,16 @@ public class ServerProxy implements PlayerListener, Runnable {
 
     @Override
     public synchronized void run() {
+        PrintStream log = null;
         try {
             String line;
+            log = new PrintStream(new File("Client.log"));
 
             while (sc.hasNextLine()) {
                 line = sc.nextLine();
                 String[] choices = line.split(" ");
-                System.out.println(line);
+                log.println(line);
+                log.flush();
 
                 switch (choices[0]) {
                 case "start":
@@ -90,6 +95,8 @@ public class ServerProxy implements PlayerListener, Runnable {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace(log);
+            log.flush();
         }
     }
 }
