@@ -50,6 +50,8 @@ public abstract class PlayerText implements ModeratorListener {
     @Override
     public void eliminated() {
         System.out.println("You have been killed");
+        JOptionPane.showMessageDialog(null, "You have been killed", "Death",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
