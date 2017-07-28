@@ -107,6 +107,12 @@ public class ServerText implements PlayerListener {
                 int k = Integer.parseInt(inputs[i]);
                 if (k > 0)
                     killed.add(players.get(k - 1));
+            } else if (roles.get(i) == 's') {
+                int k = Integer.parseInt(inputs[i]);
+                System.out.println("Seer checks "
+                        + players.get(k - 1).getName());
+                if (k > 0)
+                    players.get(i).isTarget(roles.get(k - 1) == 'w');
             }
         }
 

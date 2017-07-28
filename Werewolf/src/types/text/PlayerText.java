@@ -134,6 +134,5 @@ public abstract class PlayerText implements ModeratorListener {
     
     @Override
     public void isTarget(boolean b){
-        
     }
 }
