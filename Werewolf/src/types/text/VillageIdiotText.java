@@ -28,7 +28,7 @@ public class VillageIdiotText extends PlayerText {
     public void vote(String defense) {
         JOptionPane.showMessageDialog(null,
                 "The Player defendes themselves with\n\"" + defense
-                        + "\n You choose to kill them", "Execute",
+                        + "\"\n You choose to kill them", "Execute",
                 JOptionPane.INFORMATION_MESSAGE);
         pl.giveResponse(this, "v 1");
 

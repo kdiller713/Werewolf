@@ -16,7 +16,6 @@ public class WerewolfText extends PlayerText {
     public void awakAtNight() {
         String p = playerChoose("Would you like to kill someone");
         pl.giveResponse(this, "n " + p);
-        System.out.println(p);
     }
 
     @Override

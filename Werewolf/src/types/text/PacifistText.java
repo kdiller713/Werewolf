@@ -28,7 +28,7 @@ public class PacifistText extends PlayerText {
     public void vote(String defense) {
         JOptionPane.showMessageDialog(null,
                 "The Player defendes themselves with\n\"" + defense
-                        + "\n You choose to spare them", "Execute",
+                        + "\"\n You choose to spare them", "Execute",
                 JOptionPane.INFORMATION_MESSAGE);
         pl.giveResponse(this, "v 0");
 
